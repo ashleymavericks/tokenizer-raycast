@@ -17,7 +17,7 @@ async function initialize() {
 
   try {
     wasm = await fs.readFile(wasmPath);
-  } catch (error) {
+  } catch {
     const toast = await showToast({ style: Toast.Style.Animated, title: "Downloading Tokenizer..." });
 
     try {
