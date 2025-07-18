@@ -48,6 +48,19 @@ interface Preferences {
   tokenizer: TiktokenEncoding;
 }
 
+const getModelInfo = (encoding: TiktokenEncoding): string => {
+  switch (encoding) {
+    case "o200k_base":
+      return "GPT-4o | o200k_base";
+    case "cl100k_base":
+      return "GPT-3.5/4 | cl100k_base";
+    case "p50k_base":
+      return "GPT-3 | p50k_base";
+    default:
+      return encoding;
+  }
+};
+
 export default async function Command() {
   try {
     await initialize();
@@ -67,7 +80,7 @@ export default async function Command() {
 
     await showToast({
       style: Toast.Style.Success,
-      title: `${tokenCount} tokens (${tokenizer})`,
+      title: `${tokenCount} tokens (${getModelInfo(tokenizer)})`,
     });
   } catch (err) {
     await showToast({
